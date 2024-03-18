@@ -41,17 +41,20 @@ namespace AVN_NavisPlugin
             Application.ActiveDocument.CurrentSelection.CopyFrom(s.FindAll(Application.ActiveDocument, false));
 
 
-
+            // Перебираем все элементы в модели
             foreach (var item in Application.ActiveDocument.CurrentSelection.SelectedItems)
             {
                 if (item != null)
                 {
+                    // Находим все свойства со вкладки "Объект", если они есть
                     var objectsProperties = item.PropertyCategories.FirstOrDefault(x => x.DisplayName == "Объект")?.Properties;
                     if (objectsProperties != null)
                     {
+                        // Находим на вкладке "Объект" свойство "Рабочий набор", если оно есть
                         var workSetProp = objectsProperties.FirstOrDefault(x => x.DisplayName == "Рабочий набор");
                         if (workSetProp != null)
                         {
+                            // Считываем значение этого свойства
                             var mystring = workSetProp.Value.ToDisplayString();
 
                             if (!uniqueStrings.Contains(mystring))
@@ -65,16 +68,6 @@ namespace AVN_NavisPlugin
                 }
 
             }
-
-
-
-            //var first = Application.ActiveDocument.CurrentSelection.SelectedItems.First;
-
-            //var firstobjectsProperties = first.PropertyCategories.FirstOrDefault(x => x.DisplayName == "Объект")?.Properties;
-            //var firstworkSetProp = firstobjectsProperties.FirstOrDefault(x => x.DisplayName == "Рабочий набор");
-            //var firstmystring = firstworkSetProp.Value.ToDisplayString();
-            //sb.Append(firstmystring);
-
 
             SaveTxt.SaveToTxt(sb.ToString());
             
