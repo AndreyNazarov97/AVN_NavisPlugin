@@ -11,14 +11,9 @@ using Application = Autodesk.Navisworks.Api.Application;
 
 namespace AVN_NavisPlugin
 {
-    [Plugin("AVN_NavisPlugin", "AVN", DisplayName = "CollisionReport")]
-    public class PropertiesParser : AddInPlugin
+    public class PropertiesParser 
     {
-        Document Doc = Application.ActiveDocument;
-
-        
-
-        public override int Execute(params string[] parameters)
+        public static void ParseProperies()
         {
             StringBuilder sb = new StringBuilder();
             HashSet<string> uniqueStrings = new HashSet<string>();
@@ -74,7 +69,6 @@ namespace AVN_NavisPlugin
 
             MessageBox.Show("Готово", "AVN", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            return 0;
         }
 
 
