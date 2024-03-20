@@ -10,8 +10,6 @@ namespace AVN_NavisPlugin
 {
     internal class SaveTxt
     {
-
-
         public static void SaveToTxt(string text)
         {
             string directoryPath = @"C:\Users\user\source\repos\AVN_NavisPlugin\bin\Debug";

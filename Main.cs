@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Forms;
 using Application = Autodesk.Navisworks.Api.Application;
 
 namespace AVN_NavisPlugin
@@ -15,11 +17,15 @@ namespace AVN_NavisPlugin
         
         public override int Execute(params string[] parameters)
         {
-            Document Doc = Application.ActiveDocument;
+            CreateSelectionSetsWind window = new CreateSelectionSetsWind();
+            CreateSelectionSetsVM vm = new CreateSelectionSetsVM(window);
 
-            //PropertiesParser.ParseProperies();
+            window.DataContext = vm;
+            window.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
+            window.Show();
 
-            SearchCreator.CreateSelectionSet();
+            //PropertiesParser.ParseProperties2("Объект", "Рабочий набор");
+
 
             return 1;
         }
