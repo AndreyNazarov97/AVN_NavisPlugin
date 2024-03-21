@@ -16,7 +16,7 @@ namespace AVN_NavisPlugin
         private string categoryName = "Объект";
         private string propertyName = "Рабочий набор";
         private string folderName = "Test";
-        private bool isFolder = false;
+        private bool isFolder = true;
 
         public CreateSelectionSetsVM(Window wind)
         {
@@ -82,7 +82,6 @@ namespace AVN_NavisPlugin
             System.Windows.Forms.MessageBox.Show("Готово", "AVN", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
         });
-        
 
 
         public void OnPropertyChanged([CallerMemberName] string prop = "")

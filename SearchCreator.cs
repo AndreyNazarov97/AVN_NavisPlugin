@@ -14,6 +14,14 @@ namespace AVN_NavisPlugin
 {
     internal class SearchCreator
     {
+        /// <summary>
+        /// Создание поискового набора
+        /// </summary>
+        /// <param name="categoryName">имя вкладки со свойствами</param>
+        /// <param name="propertyName">имя свойства</param>
+        /// <param name="valueString">значение для поиска</param>
+        /// <param name="isFolder">создавать ли папку</param>
+        /// <param name="folderName">имя папки</param>
         public static void CreateSelectionSet(string categoryName, string propertyName, string valueString, bool isFolder , string folderName = null)
         {
             // Создаем новый поиск
@@ -89,50 +97,5 @@ namespace AVN_NavisPlugin
             return output;
         }
 
-        /// <summary>
-        /// Outputs to a message box the structure of the selection sets
-        /// </summary>
-        static public void ListSelectionSets()
-        {
-            //build output string for display
-            string output =
-               WriteSelectionSetContent(
-               Application.ActiveDocument.SelectionSets.RootItem,
-               Application.ActiveDocument.Title,
-               "");
-
-            //output in a message box
-            MessageBox.Show(output);
-        }
-        static public void TestSavedItemReference()
-        {
-            //first check we have some data to test this with
-            if (Application.ActiveDocument.SelectionSets.RootItem.Children.Count > 0)
-            {
-                //get the first child item
-                SavedItem item = Application.ActiveDocument.SelectionSets.RootItem.Children[0];
-
-                //create the SavedItemReference
-                SavedItemReference reference =
-                   Application.ActiveDocument.SelectionSets.CreateReference(item);
-
-                //check the resolved reference
-                if (Application.ActiveDocument.SelectionSets.ResolveReference(reference)
-                   == Application.ActiveDocument.SelectionSets.RootItem.Children[0])
-                {
-                    MessageBox.Show("resolved item matches the first child item");
-                }
-
-                //remove the SavedItem
-                bool val = Application.ActiveDocument.SelectionSets.Remove(item);
-
-                //check resolved reference is no longer valid
-                if (Application.ActiveDocument.SelectionSets.ResolveReference(reference)
-                   == null)
-                {
-                    MessageBox.Show("SavedItem no longer exists");
-                }
-            }
-        }
     }
 }
