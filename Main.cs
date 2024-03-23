@@ -1,13 +1,6 @@
-﻿using Autodesk.Navisworks.Api;
-using Autodesk.Navisworks.Api.Plugins;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Forms;
-using Application = Autodesk.Navisworks.Api.Application;
+﻿using Autodesk.Navisworks.Api.Plugins;
+using AVN_NavisPlugin.ViewModels;
+using AVN_NavisPlugin.Views;
 
 namespace AVN_NavisPlugin
 {
@@ -23,8 +16,6 @@ namespace AVN_NavisPlugin
             window.DataContext = vm;
             window.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             window.Show();
-
-            //PropertiesParser.ParseProperties2("Объект", "Рабочий набор");
 
 
             return 1;

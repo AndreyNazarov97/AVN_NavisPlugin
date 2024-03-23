@@ -72,8 +72,14 @@
   <ItemGroup>
     <Compile Include="ChatGPT.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
-    <Compile Include="CreateSelectionSetsVM.cs" />
-    <Compile Include="CreateSelectionSetsWind.xaml.cs">
+    <Compile Include="Services\CreateSelectionSetsService.cs" />
+    <Compile Include="ViewModels\CreateSelectionSetsVM.cs" />
+    <Compile Include="Services\ParsePropertiesService.cs" />
+    <Compile Include="ViewModels\CreateSelectionSetsFromClassificatorVM.cs" />
+    <Compile Include="Views\CreateSelectionSetsFromTxt.xaml.cs">
+      <DependentUpon>CreateSelectionSetsFromTxt.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CreateSelectionSetsWind.xaml.cs">
       <DependentUpon>CreateSelectionSetsWind.xaml</DependentUpon>
     </Compile>
     <Compile Include="Main.cs" />
@@ -81,11 +87,16 @@
     <Compile Include="PropertiesParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SaveTxt.cs" />
+    <Compile Include="Services\ParseClassificatorService.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="CreateSelectionSetsWind.xaml">
+    <Page Include="Views\CreateSelectionSetsFromTxt.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CreateSelectionSetsWind.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

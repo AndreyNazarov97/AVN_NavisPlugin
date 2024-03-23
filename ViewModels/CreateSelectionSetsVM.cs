@@ -1,5 +1,6 @@
 ﻿using Autodesk.Navisworks.Api;
 using AVN_NavisPlugin.Commands;
+using AVN_NavisPlugin.Services;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -7,8 +8,11 @@ using System.Windows.Forms;
 using System.Windows.Input;
 using Application = Autodesk.Navisworks.Api.Application;
 
-namespace AVN_NavisPlugin
+namespace AVN_NavisPlugin.ViewModels
 {
+    /// <summary>
+    /// Viewmodel для создание поисковых наборов из документа Navisworks
+    /// </summary>
     internal class CreateSelectionSetsVM : INotifyPropertyChanged
     {
 
@@ -17,6 +21,8 @@ namespace AVN_NavisPlugin
         private string propertyName = "Рабочий набор";
         private string folderName = "Test";
         private bool isFolder = true;
+        private ParsePropertiesService parsePropertiesService;
+        private CreateSelectionSetsService createSelectionSetsService;
 
         public CreateSelectionSetsVM(Window wind)
         {
@@ -64,17 +70,20 @@ namespace AVN_NavisPlugin
             }
         }
 
-
+        /// <summary>
+        /// Команда по созданию поисковых наборов
+        /// </summary>
         public ICommand CreateSelectionSetsCommand => new RelayCommand(() =>
         {
             Document Doc = Application.ActiveDocument;
+            parsePropertiesService = new ParsePropertiesService();
+            createSelectionSetsService = new CreateSelectionSetsService();
 
-            var values = PropertiesParser.ParseProperties2(CategoryName, PropertyName);
-
+            var values = parsePropertiesService.ParseProperties(CategoryName, PropertyName);
 
             foreach (var value in values)
             {
-                SearchCreator.CreateSelectionSet(CategoryName, PropertyName, value, IsFolder, FolderName);
+                createSelectionSetsService.CreateSelectionSet(CategoryName, PropertyName, value, IsFolder, FolderName);
             }
 
             _window.Close();

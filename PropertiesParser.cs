@@ -151,6 +151,6 @@ namespace AVN_NavisPlugin
             return properties;
         }
 
-
+        
     }
 }
