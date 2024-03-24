@@ -51,19 +51,25 @@ namespace AVN_NavisPlugin.ViewModels
             Document Doc = Application.ActiveDocument;
             parseClassificatorService = new ParseClassificatorService();
             createSelectionSetsService = new CreateSelectionSetsService();
-    
-            var dict = parseClassificatorService.GroupValuesByThirdColumn(Filepath);
-            FolderItem rootFolder = new FolderItem() { DisplayName = folderName };
-            Doc.SelectionSets.AddCopy(rootFolder);
 
-            foreach ( var item in dict )
+            using (Transaction tr = new Transaction(Doc, "Create Selection Sets"))
             {
-                string itemFolderName = $"Группа {item.Key}";   
-                foreach(var value in item.Value )
-                {
 
-                    createSelectionSetsService.CreateSelectionSet(categoryName, propertyName, value, true, itemFolderName, rootFolder);
+                var dict = parseClassificatorService.GroupValuesByThirdColumn(Filepath);
+                FolderItem rootFolder = new FolderItem() { DisplayName = folderName };
+                Doc.SelectionSets.AddCopy(rootFolder);
+
+
+                foreach (var item in dict)
+                {
+                    string itemFolderName = $"Группа {item.Key}";
+                    foreach (var value in item.Value)
+                    {
+
+                        createSelectionSetsService.CreateSelectionSet(categoryName, propertyName, value, true, itemFolderName, rootFolder);
+                    }
                 }
+
             }
 
             _window.Close();

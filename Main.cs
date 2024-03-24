@@ -1,4 +1,5 @@
-﻿using Autodesk.Navisworks.Api.Plugins;
+﻿using Autodesk.Navisworks.Api;
+using Autodesk.Navisworks.Api.Plugins;
 using AVN_NavisPlugin.ViewModels;
 using AVN_NavisPlugin.Views;
 

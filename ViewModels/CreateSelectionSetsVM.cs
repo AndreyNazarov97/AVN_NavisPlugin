@@ -79,11 +79,14 @@ namespace AVN_NavisPlugin.ViewModels
             parsePropertiesService = new ParsePropertiesService();
             createSelectionSetsService = new CreateSelectionSetsService();
 
-            var values = parsePropertiesService.ParseProperties(CategoryName, PropertyName);
-
-            foreach (var value in values)
+            using (Transaction tr = new Transaction(Doc, "Create Selection Sets"))
             {
-                createSelectionSetsService.CreateSelectionSet(CategoryName, PropertyName, value, IsFolder, FolderName);
+                var values = parsePropertiesService.ParseProperties(CategoryName, PropertyName);
+
+                foreach (var value in values)
+                {
+                    createSelectionSetsService.CreateSelectionSet(CategoryName, PropertyName, value, IsFolder, FolderName);
+                }
             }
 
             _window.Close();

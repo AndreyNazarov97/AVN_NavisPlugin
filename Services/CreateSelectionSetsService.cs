@@ -54,8 +54,6 @@ namespace AVN_NavisPlugin.Services
                     //добавляем ее в поисковые наборы
                     
                     selectionSets.AddCopy(folderItem);
-                        
-             
 
                     folder = (FolderItem)selectionSets.RootItem.Children.FirstOrDefault(x => x.DisplayName == folderName);
                 }
